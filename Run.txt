@@ -1,0 +1,101 @@
+Here is your complete and fully descriptive text content (no PDF) that documents your dual GitHub SSH setup, the config file, and how to push a project to your secondary (work) GitHub account using the Suupratik identity:
+
+✅ Dual GitHub SSH Setup – Full Case Study
+👤 Account Info
+Type	GitHub Username	Email	SSH Key File Name
+Personal	Supratik6	sriijan6@gmail.com	id_ed25519
+Work (2nd)	Suupratik	supratikmitra15@gmail.com	id_ed25519_suupratik
+
+📁 Your .ssh Folder Contents
+arduino
+Copy
+Edit
+C:\Users\pc\.ssh\
+├── config
+├── id_ed25519
+├── id_ed25519.pub
+├── id_ed25519_suupratik
+├── id_ed25519_suupratik.pub
+├── known_hosts
+├── known_hosts.old
+└── How to run/ (your project folder)
+🛠️ SSH config File Setup
+You created this file at C:\Users\pc\.ssh\config with the following content:
+
+bash
+Copy
+Edit
+# Personal GitHub (default)
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519
+  IdentitiesOnly yes
+
+# Work GitHub (Suupratik)
+Host github-suupratik
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_suupratik
+  IdentitiesOnly yes
+This allows you to use:
+
+git@github.com:Supratik6/<repo>.git → Personal account
+
+git@github-suupratik:Suupratik/<repo>.git → Work account
+
+📦 Example Project: How to Run
+📍 Location:
+C:\Users\pc\.ssh\How to run\
+
+🧾 Full Command Sequence (as you executed)
+bash
+Copy
+Edit
+cd "C:\Users\pc\.ssh\How to run"
+
+# Step 1: Initialize Git repo
+git init
+
+# Step 2: Add all files to Git
+git add .
+
+# Step 3: Commit
+git commit -m "Initial commit"
+
+# Step 4: Rename branch from 'master' to 'main'
+git branch -m master main
+
+# Step 5: Add remote using work identity
+git remote add origin git@github-suupratik:Suupratik/How-to-Run.git
+
+# Step 6: Push to remote
+git push -u origin main
+🧠 Explanation
+git init starts a new Git repo.
+
+git add . stages all your files.
+
+git commit saves a snapshot.
+
+git branch -m master main renames the branch (GitHub now prefers main).
+
+git remote add origin ... links the repo to GitHub using your secondary account via SSH alias github-suupratik.
+
+git push -u origin main uploads your code to that repo and sets it as default for future pushes.
+
+🔁 Notes for Future Use
+For Personal account, use:
+
+scss
+Copy
+Edit
+git remote add origin git@github.com:Supratik6/<repo-name>.git
+For Work account, use:
+
+sql
+Copy
+Edit
+git remote add origin git@github-suupratik:Suupratik/<repo-name>.git
+Always use the correct alias (github.com vs github-suupratik) when pushing to different accounts.
+
